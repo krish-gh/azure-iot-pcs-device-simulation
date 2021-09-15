@@ -6,6 +6,7 @@ import { Deployment, ResourceGroup, ResourceGroupsCreateOrUpdateResponse } from 
 import { credentials } from './auth';
 import { armConstants, solutionConstants } from './constants';
 import * as MicrosoftGraph from '@microsoft/microsoft-graph-types'
+import "isomorphic-fetch";
 import { IArmTemplateParameters } from './interfaces';
 import { AuthorizationManagementClient } from '@azure/arm-authorization'
 import * as uuid from 'uuid';

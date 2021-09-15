@@ -2,7 +2,8 @@
 // Licensed under the MIT license.
 
 import { Client } from '@microsoft/microsoft-graph-client';
-import * as MicrosoftGraph from '@microsoft/microsoft-graph-types'
+import * as MicrosoftGraph from '@microsoft/microsoft-graph-types';
+import "isomorphic-fetch";
 import moment = require('moment');
 import { buildApplicationCreateParameters } from './aadAppCreateparameters';
 import { credentials } from './auth';

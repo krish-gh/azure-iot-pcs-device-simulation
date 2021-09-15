@@ -3,6 +3,7 @@
 
 import { aadConstants } from './constants';
 import * as MicrosoftGraph from '@microsoft/microsoft-graph-types'
+import "isomorphic-fetch";
 import { credentials } from './auth';
 import { IArmTemplateParameters } from './interfaces';
 import { getWebsiteUrl } from './utils';
