@@ -51,7 +51,7 @@ export async function createAadApp(config: IArmTemplateParameters, creds: creden
     }catch(ex){
 
         console.log(`Error while attempting to register an AAD application with the name '${config.solutionName.value}'...`);
-        throw new Error(ex);
+        throw ex;
 
     }
 }
@@ -71,7 +71,7 @@ export async function createServicePrincipal(appId: string): Promise<MicrosoftGr
     try{
         return await _client.api('/servicePrincipals').post(servicePrincipalCreateParameters);
     }catch(ex){
-        const msg = ex.message? ex.message : '';
+        const msg = (ex as Error).message? (ex as Error).message : '';
         throw new Error(`Service-principal creation failed. ${msg}`);
     }
 }
