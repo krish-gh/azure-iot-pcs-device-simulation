@@ -74,7 +74,7 @@ function buildParameters(
     parameters.aadClientId.value = sp.appId;
     parameters.domain.value = creds.armCredentials.domain;
     parameters.aadClientServicePrincipalId.value = sp.id;
-    parameters.aadClientSecret.value = '';
+    parameters.aadClientSecret.value = sp.passwordCredentials[0].secretText;
     parameters.storageEndpointSuffix.value = creds.environment.storageEndpointSuffix;
 
     return parameters;

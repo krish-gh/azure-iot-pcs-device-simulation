@@ -20,7 +20,7 @@ let _client: Client;
  * @param  {credentials} creds
  * @returns Promise
  */
-export async function createAadApp(config: IArmTemplateParameters, creds: credentials): Promise<string>{
+export async function createAadApp(config: IArmTemplateParameters, creds: credentials): Promise<MicrosoftGraph.Application>{
 
     const tokenResponse = await creds.graphCredentials.getToken();
 
@@ -44,10 +44,12 @@ export async function createAadApp(config: IArmTemplateParameters, creds: creden
 
         // Set credentials for the app
         const passwordCredential = _buildPasswordCredential()
-        await _client.api(`/applications/${appCreationResponse.id}/addPassword`).post(passwordCredential);
+        const password = await _client.api(`/applications/${appCreationResponse.id}/addPassword`).post(passwordCredential);
         console.log(`Password credentials updated for AAD application '${appCreationResponse.displayName}'.`);
-        
-        return appCreationResponse.appId;
+        appCreationResponse.passwordCredentials = [ {
+            secretText: password.secretText
+        } ];
+        return appCreationResponse;
 
     }catch(ex){
 

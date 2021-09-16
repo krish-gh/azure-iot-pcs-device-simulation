@@ -20,13 +20,15 @@ async function main(){
     const credentials = await login(deploymentConfig);
 
     // Create an AAD app
-    const appId = await createAadApp(deploymentConfig, credentials);
+    const app = await createAadApp(deploymentConfig, credentials);
 
     // Create service principal
-    const servicePrincipal = await createServicePrincipal(appId);
+    const servicePrincipal = await createServicePrincipal(app.appId);
 
     // Create app role assignment
     await createAppRoleAssignment(servicePrincipal);
+
+    servicePrincipal.passwordCredentials = app.passwordCredentials;
 
     // Deploy Azure resources
     await deployAzureResources(deploymentConfig, credentials, servicePrincipal);
